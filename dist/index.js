@@ -147,6 +147,9 @@ const buildComment = ({ results }) => {
             diffHtml = (0, html_1.th)(renderEmoji(result.diff), ' ', arrow, ' ', plus, result.diff.toFixed(2), '%');
         }
         const htmlResults = (0, tabulate_1.tabulate)(result.details);
+        if (typeof result.coverage === 'string') {
+            return `${(0, html_1.table)((0, html_1.tbody)((0, html_1.tr)((0, html_1.th)(result.app), (0, html_1.th)('unknown', '%'), diffHtml)))} \n\n ${(0, html_1.details)((0, html_1.summary)('Coverage Report'), htmlResults)} <br/>`;
+        }
         return `${(0, html_1.table)((0, html_1.tbody)((0, html_1.tr)((0, html_1.th)(result.app), (0, html_1.th)(result.coverage.toFixed(2), '%'), diffHtml)))} \n\n ${(0, html_1.details)((0, html_1.summary)('Coverage Report'), htmlResults)} <br/>`;
     });
     const title = `Code Coverage:<p></p>`;
@@ -304,7 +307,7 @@ const main_1 = __nccwpck_require__(3109);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const noCoverageRan = (0, core_1.getBooleanInput)('no-coverage-ran') || false;
+            const noCoverageRan = (0, core_1.getInput)('no-coverage-ran') === 'true' || false;
             const token = (0, core_1.getInput)('github-token');
             const coverageFolder = (0, core_1.getInput)('coverage-folder') || 'coverage';
             const coverageBaseFolder = (0, core_1.getInput)('coverage-base-folder') || 'coverage-base';

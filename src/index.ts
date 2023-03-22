@@ -1,7 +1,6 @@
 import {
-  getBooleanInput,
-  getInput,
   error as logError,
+  getInput,
   info as logInfo,
   setFailed
 } from '@actions/core'
@@ -10,7 +9,7 @@ import {main} from './main'
 
 async function run(): Promise<void> {
   try {
-    const noCoverageRan = getBooleanInput('no-coverage-ran') || false
+    const noCoverageRan = getInput('no-coverage-ran') === 'true' || false
     const token = getInput('github-token')
     const coverageFolder = getInput('coverage-folder') || 'coverage'
     const coverageBaseFolder =
